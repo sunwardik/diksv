@@ -1,0 +1,63 @@
+body{background:green; 
+margin:0;
+padding:0;}
+.shapka h1{
+	float:left;
+	margin:20px;
+	text-shadow:1px 1px 4px gold;
+	color:red;
+}
+.shapka img{
+	float:right;
+	margin:20px;
+}
+.shapka{
+	height:240px;
+	border-bottom:1px red solid;
+	background:url(../img/koga16.jpg);
+}
+.topmenu{
+	display:flex;
+	width:100%;
+	margin:0 auto;
+}
+.topmenu a{
+	flex:1;
+	font-size:16px;
+	display:block;
+	padding:10px 0;
+	text-align:center;
+	background:gold;
+	color:white;
+	text-decoration:none;
+	text-shadow:1px 1px 2px black; 
+	border-right:1px red solid;
+}
+.topmenu a:hover{
+	background:red;
+	color:white;
+}
+.foot{
+	text-align:center;
+	background:grey;
+	padding:40px;
+	color:black;
+	margin-top:40px;
+}
+.foot a{
+	color:white;
+}
+.mainblock{
+	margin:40;
+}
+@media screen and (max-width: 768px){
+	.head img{
+		display:none;
+	}
+	.shapka{
+		height:100px;
+	}
+	.topmenu{
+		flex-direction:column;
+	}
+}
