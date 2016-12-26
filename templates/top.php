@@ -1,6 +1,13 @@
 <?php
+session_start();
 	require_once('config/config.php');
+	if($_SESSION['id']){
+		$query="SELECT * FROM users WHERE id=".$_SESSION ['id'];
+		$auth=mysqli_query($dbcon,$query);
+		$auth_user=mysqli_fetch_array($auth);
+	}
 ?>
+
 <!Doctype html>
 <html>
 <head>
@@ -13,6 +20,22 @@
 
 <body>
 <header class='shapka'>
+<?php
+if($_SESSION['id']){
+?>
+	<a href='cabinet.php' class='btn btn-link my'>Кабинет 
+<?=$auth_user['Login']?
+	$auth_user['login']:'Пользователь';?>
+	</a>
+	<a href='logout.php' class='btn btn-link my'>Выход</a>
+<?php
+}else{
+?>
+<a href='reg.php'>Регистрация</a>
+<a href='login.php'>Вход</a>
+<?php
+}
+?>
 <h1> Название сайта</h1>
 <img src='media/img/logo.png'/>
 </header>
