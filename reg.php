@@ -1,4 +1,6 @@
-<?php require_once('templates/top.php');
+<?php 
+require_once('templates/top.php');
+require_once('libs/functions.php');
 if($_POST){
 	$error=array();
 	$email=$_POST['email'];
@@ -45,15 +47,7 @@ echo "</div>";
 									 NOW(),
 									 'unblock'
 	)";
-	$in=mysqli_query($dbcon,$query);
-	if(!$in){
-		exit('Ошибка запроса');	
-	}
-	?>
-		<script>
-			location.href='index.php';
-		</script>
-	<?php	
+	 insert($query, 'reg.php');
 }	
 }
 ?>

@@ -49,17 +49,17 @@ if($_SESSION['id']){
 </nav>
 <div class='mainblock'>
 <div class='container1'>
-<div class='col-md-2'>
+<div class='col-md-2 menu'>
 <?php
 $obj_menu=mysqli_query($dbcon, "SELECT * FROM maintexts WHERE leftmenu='1'");
 while($menu=mysqli_fetch_array($obj_menu)){
-echo "<a href='index.php?url=".$menu['url']."'>";
+echo "<a href='index.php?url=".$menu['url']."' class='btn btn-default btn-block'>";
 	echo $menu['name'];
 	echo "</a>";
 }
 ?>
 </div>
-<h3>Перечень</h3>
+ 
 
-<div class='col-md-8'>
+<div class='col-md-8 maintext'>
 

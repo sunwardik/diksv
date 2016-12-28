@@ -1,65 +1,66 @@
 <?php
-session_start();
-	require_once('config/config.php');
-	if($_SESSION['id']){
-		$query="SELECT * FROM users WHERE id=".$_SESSION ['id'];
-		$auth=mysqli_query($dbcon,$query);
-		$auth_user=mysqli_fetch_array($auth);
-	}
-?>
-
-<!Doctype html>
-<html>
-<head>
-<meta charset='utf-8'>
-<title> Название сайта </title>
-<meta name='description' content='1-2-3 предложения'>
-<meta name='keywords' content='выражения через запятую'>
-<link href='media/bootstrap/css/bootstrap.min.css' rel='stylesheet'/>
-<link type='text/css' rel='stylesheet' href='media/css/style.css'/>
-
-<body>
-<header class='shapka'>
-<?php
+	require_once('templates/top.php');
+	require_once('libs/functions.php');
 if($_SESSION['id']){
-?>
-	<a href='cabinet.php' class='btn btn-link my'>Кабинет 
-<?=$auth_user['Login']?
-	$auth_user['login']:'Пользователь';?>
-	</a>
-	<a href='logout.php' class='btn btn-link my'>Выход</a>
-<?php
-}else{
-?>
-<a href='reg.php'>Регистрация</a>
-<a href='login.php'>Вход</a>
-<?php
+	if($_POST){
+	$phone=$_POST['phone'];
+	$address=$_POST['address'];
+	$data_rod=$_POST['data_rod'];
+	if($_FILES){
+		$tmp_name=$_FILES['picture']['tmp_name'];
+		$name=$_FILES['picture']['name'];
+		$dir=$_SERVER['DOCUMENT_ROOT']."/media/photos/";
+		if(!is_dir($dir)){
+			@mkdir($dir,0777);
+		}
+		if(is_uploaded_file($tmp_name)){
+			move_uploaded_file($tmp_name,$dir.$name);
+		}else{
+			echo"Ошибка загрузки";
+		}
+/* 		echo"<pre>";
+		print_r($_FILES);
+		echo"</pre>"; */
+	}else{
+		$name="";
+	}
+	$query="INSERT INTO account VALUES (null,".$_SESSION['id'].",
+												'$phone',
+												'$address',
+												'$data_rod',
+												NOW(),
+												NOW(),
+												'$name')";
+	insert($query, 'cabinet.php');
+  
 }
 ?>
-<h1> Название сайта</h1>
-<img src='media/img/logo.png'/>
-</header>
-<nav class='topmenu'>
-<a href='index.php?url=index'>Главная</a>
-<a href='index.php?url=about'>О компании</a>
-<a href='#'>Новость</a>
-<a href='#'>Товары</a>
-<a href='index.php?url=contact'>Контакты</a>
 
-</nav>
-<div class='mainblock'>
-<div class='container1'>
-<div class='col-md-2'>
+
+ 
+  <form enctype='multipart/form-data' method='post' action='cabinet.php'>
+  <div class="form-group">
+    <label for="phone">Телефон</label>
+    <input type="text" class="form-control" id="phone" name="phone" placeholder="phone">
+  </div>
+  <div class="form-group">
+    <label for="address">Адресс</label>
+    <input type="text" class="form-control" id="address" name="address" placeholder="address">
+  </div>
+  <div class="form-group">
+    <label for="data_rod">Дата рождения</label>
+    <input type="date" id="data_rod" name="data_rod">
+  </div>
+   <div class="form-group">
+    <label for="picture">Аватар</label> 
+	<input type="file" id="picture" name="picture">
+  </div>
+  <button type="submit" class="btn btn-default">Submit</button>
+</form>
 <?php
-$obj_menu=mysqli_query($dbcon, "SELECT * FROM maintexts WHERE leftmenu='1'");
-while($menu=mysqli_fetch_array($obj_menu)){
-echo "<a href='index.php?url=".$menu['url']."'>";
-	echo $menu['name'];
-	echo "</a>";
+} else{
+	echo 'Ошибка входа';
 }
+
+	require_once('templates/bottom.php');
 ?>
-</div>
-<h3>Перечень</h3>
-
-<div class='col-md-8'>
-
