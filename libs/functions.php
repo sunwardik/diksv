@@ -15,12 +15,12 @@ document.location.href='<?=$redirect;?>';
 </script>
 <?php
 }
-function selectone(){
+function selectone($query){
 	global $dbcon;
 	$result=mysqli_query($dbcon,$query);
 	if(!$result){
 		exit("Ошибка");
 	}
-	$row=mysqli_affected_array($result);
+	$row=mysqli_fetch_array($result);
 	return $row;
 }

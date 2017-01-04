@@ -1,6 +1,8 @@
 <?php
 session_start();
+
 	require_once('config/config.php');
+	require_once('libs/functions.php');
 	if($_SESSION['id']){
 		$query="SELECT * FROM users WHERE id=".$_SESSION ['id'];
 		$auth=mysqli_query($dbcon,$query);
@@ -17,7 +19,8 @@ session_start();
 <meta name='keywords' content='выражения через запятую'>
 <link href='media/bootstrap/css/bootstrap.min.css' rel='stylesheet'/>
 <link type='text/css' rel='stylesheet' href='media/css/style.css'/>
-
+<script src='media/js/jquery-3.1.1.min.js'></script>
+<script src='media/js/main.js'></script>
 <body>
 <header class='shapka'>
 <?php
@@ -38,12 +41,13 @@ if($_SESSION['id']){
 ?>
 <h1> Название сайта</h1>
 <img src='media/img/logo.png'/>
+<div class='empty'></div>
 </header>
 <nav class='topmenu'>
-<a href='index.php?url=index'>Главная</a>
-<a href='index.php?url=about'>О компании</a>
-<a href='#'>Новость</a>
-<a href='#'>Товары</a>
+<a href='/' data-title='Главная'data-body='Описание' data-color='red'></a>
+<a href='index.php?url=about' data-color='green'>О компании</a>
+<a href='#'data-color='blue'>Новость</a>
+<a href='#'data-color='tortoise'>Товары</a>
 <a href='index.php?url=contact'>Контакты</a>
 
 </nav>

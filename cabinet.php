@@ -1,6 +1,6 @@
 <?php
 	require_once('templates/top.php');
-	require_once('libs/functions.php');
+	
 if($_SESSION['id']){
 	if($_POST){
 	$phone=$_POST['phone'];
